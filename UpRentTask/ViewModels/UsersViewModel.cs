@@ -1,5 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using UprentTask.Library.Messages;
 using UprentTask.Library.Models;
 
 namespace UpRentTask.ViewModels;
@@ -18,7 +21,11 @@ public partial class UsersViewModel : ObservableObject
         });
     }
 
-
+    [RelayCommand]
+    private void EditUsers()
+    {
+        WeakReferenceMessenger.Default.Send(new ChangeViewMessage("EditUsers"));
+    }
 
     private void GenerateDemoUsers()
     {

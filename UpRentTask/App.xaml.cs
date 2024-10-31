@@ -20,6 +20,7 @@ namespace UpRentTask
                 
                 .AddTransient<MainViewModel>()
                 .AddTransient<UsersViewModel>()
+                .AddTransient<EditUsersViewModel>()
                 
                 .BuildServiceProvider());
         }
