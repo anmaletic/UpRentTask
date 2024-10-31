@@ -7,10 +7,8 @@
         Title="MainView"
         Width="800"
         Height="450"
+        d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
         mc:Ignorable="d">
-  <Window.DataContext>
-    <viewModels:MainViewModel />
-  </Window.DataContext>
 
   <ContentPresenter Content="{Binding ActiveView}" />
 </Window>
