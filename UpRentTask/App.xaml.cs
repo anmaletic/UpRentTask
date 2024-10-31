@@ -1,4 +1,8 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
+using UpRentTask.DataAccess.Context;
+using UpRentTask.DataAccess.Services;
+
 namespace UpRentTask
 {
     /// <summary>
@@ -17,6 +21,10 @@ namespace UpRentTask
             
             Ioc.Default.ConfigureServices(new ServiceCollection()
                 .AddSingleton(config)
+                
+                .AddDbContext<AppDbContext>(options =>
+                    options.UseSqlServer(config.GetConnectionString("DefaultConnection")))
+                .AddScoped<IUserService, UserService>()
                 
                 .AddTransient<MainViewModel>()
                 .AddTransient<UsersViewModel>()

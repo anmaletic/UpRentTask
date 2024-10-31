@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpRentTask", "UpRentTask\Up
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UprentTask.Library", "UprentTask.Library\UprentTask.Library.csproj", "{F3FC9931-3683-4314-A8AA-83D0F3F64BAF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpRentTask.DataAccess", "UpRentTask.DataAccess\UpRentTask.DataAccess.csproj", "{D3E52CE2-723A-492E-9E23-E0FE89436CB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F3FC9931-3683-4314-A8AA-83D0F3F64BAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3FC9931-3683-4314-A8AA-83D0F3F64BAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3FC9931-3683-4314-A8AA-83D0F3F64BAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3E52CE2-723A-492E-9E23-E0FE89436CB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3E52CE2-723A-492E-9E23-E0FE89436CB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3E52CE2-723A-492E-9E23-E0FE89436CB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3E52CE2-723A-492E-9E23-E0FE89436CB9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
