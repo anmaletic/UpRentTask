@@ -4,6 +4,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:UpRentTask.Views"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:UpRentTask.ViewModels"
+             d:DataContext="{d:DesignInstance viewModels:UsersViewModel}"
              d:DesignHeight="800"
              d:DesignWidth="1200"
              mc:Ignorable="d">
@@ -26,13 +28,15 @@
 
     <DataGrid Grid.Row="1"
               Margin="10"
-              AutoGenerateColumns="False" ColumnHeaderHeight="40" RowHeight="35">
+              AutoGenerateColumns="False" CanUserAddRows="False" ColumnHeaderHeight="40"
+              ItemsSource="{Binding Users}"
+              RowHeight="35">
       <DataGrid.Columns>
-        <DataGridTextColumn Width="*" Header="Korisničko ime" />
-        <DataGridTextColumn Width="*" Header="Datum kreiranja" />
-        <DataGridTextColumn Width="*" Header="Kreirao" />
-        <DataGridTextColumn Width="*" Header="Datum izmjene" />
-        <DataGridTextColumn Width="*" Header="Izmjenio" />
+        <DataGridTextColumn Width="*" Binding="{Binding Username}" Header="Korisničko ime" />
+        <DataGridTextColumn Width="*" Binding="{Binding CreatedDate}" Header="Datum kreiranja" />
+        <DataGridTextColumn Width="*" Binding="{Binding CreatedBy.Username}" Header="Kreirao" />
+        <DataGridTextColumn Width="*" Binding="{Binding ModifiedDate}" Header="Datum izmjene" />
+        <DataGridTextColumn Width="*" Binding="{Binding ModifiedBy.Username}" Header="Izmjenio" />
       </DataGrid.Columns>
     </DataGrid>
   </Grid>

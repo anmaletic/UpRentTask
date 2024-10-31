@@ -19,6 +19,7 @@ namespace UpRentTask
                 .AddSingleton(config)
                 
                 .AddTransient<MainViewModel>()
+                .AddTransient<UsersViewModel>()
                 
                 .BuildServiceProvider());
         }
