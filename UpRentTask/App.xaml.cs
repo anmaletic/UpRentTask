@@ -1,11 +1,4 @@
-﻿using System.Configuration;
-using System.Data;
-using System.IO;
-using System.Windows;
-using CommunityToolkit.Mvvm.DependencyInjection;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-
+﻿
 namespace UpRentTask
 {
     /// <summary>
@@ -24,8 +17,10 @@ namespace UpRentTask
             
             Ioc.Default.ConfigureServices(new ServiceCollection()
                 .AddSingleton(config)
+                
+                .AddTransient<MainViewModel>()
+                
                 .BuildServiceProvider());
-            
         }
         
         private IConfiguration AddConfiguration()
