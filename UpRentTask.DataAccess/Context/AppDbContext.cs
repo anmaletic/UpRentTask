@@ -43,6 +43,8 @@ public partial class AppDbContext : DbContext
                 .HasConstraintName("FK_User_User_Created");
 
             entity.HasOne(d => d.ModifiedByUser).WithMany(p => p.InverseModifiedByUser).HasConstraintName("FK_User_User_Modified");
+            
+            entity.HasQueryFilter(x => x.Visible);
         });
 
         modelBuilder.Entity<UserRole>(entity =>
