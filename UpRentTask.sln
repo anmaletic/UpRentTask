@@ -5,6 +5,8 @@ VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpRentTask", "UpRentTask\UpRentTask.csproj", "{8DA494E4-187A-4A8E-8AEB-1EA30F847C8D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UprentTask.Library", "UprentTask.Library\UprentTask.Library.csproj", "{F3FC9931-3683-4314-A8AA-83D0F3F64BAF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{8DA494E4-187A-4A8E-8AEB-1EA30F847C8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DA494E4-187A-4A8E-8AEB-1EA30F847C8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DA494E4-187A-4A8E-8AEB-1EA30F847C8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3FC9931-3683-4314-A8AA-83D0F3F64BAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3FC9931-3683-4314-A8AA-83D0F3F64BAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3FC9931-3683-4314-A8AA-83D0F3F64BAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3FC9931-3683-4314-A8AA-83D0F3F64BAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
