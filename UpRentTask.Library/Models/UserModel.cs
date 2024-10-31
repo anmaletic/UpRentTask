@@ -1,4 +1,4 @@
-﻿namespace UprentTask.Library.Models;
+﻿namespace UpRentTask.Library.Models;
 
 public class UserModel
 {

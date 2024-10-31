@@ -1,4 +1,4 @@
-﻿namespace UprentTask.Library.Messages;
+﻿namespace UpRentTask.Library.Messages;
 
 public class ChangeViewMessage(string view)
 {

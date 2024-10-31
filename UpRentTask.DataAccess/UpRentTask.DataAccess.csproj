@@ -15,7 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\UprentTask.Library\UprentTask.Library.csproj" />
+      <ProjectReference Include="..\UpRentTask.Library\UpRentTask.Library.csproj" />
     </ItemGroup>
 
 </Project>

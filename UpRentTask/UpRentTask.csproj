@@ -29,7 +29,7 @@
   
   <ItemGroup>
     <ProjectReference Include="..\UpRentTask.DataAccess\UpRentTask.DataAccess.csproj" />
-    <ProjectReference Include="..\UprentTask.Library\UprentTask.Library.csproj" />
+    <ProjectReference Include="..\UpRentTask.Library\UpRentTask.Library.csproj" />
   </ItemGroup>
 
 </Project>
