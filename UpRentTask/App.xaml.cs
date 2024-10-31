@@ -20,6 +20,7 @@
                 .AddDbContext<AppDbContext>(options =>
                     options.UseSqlServer(config.GetConnectionString("DefaultConnection")))
                 .AddScoped<IUserService, UserService>()
+                .AddScoped<IRoleService, RoleService>()
                 
                 .AddSingleton<ILoggedInUser, UserModel>()
                 

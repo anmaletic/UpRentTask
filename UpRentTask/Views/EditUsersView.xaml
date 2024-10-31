@@ -31,24 +31,34 @@
 
         <StackPanel Margin="0,20" HorizontalAlignment="Center">
           <StackPanel Orientation="Horizontal">
-            <Label Content="Korisničko ime" />
-            <TextBox Width="180" Height="35" />
+            <Label VerticalContentAlignment="Center" Content="Korisničko ime" />
+            <TextBox Width="180" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
           </StackPanel>
         </StackPanel>
 
         <Border BorderBrush="#212121" BorderThickness="1" CornerRadius="20">
-          <StackPanel Margin="10">
-            <Label Content="Dodjeljene grupe" />
+          <StackPanel Margin="20,10,20,20">
+            <Label Margin="20,0,0,0" VerticalContentAlignment="Center"
+                   Content="Dodjeljene grupe" FontSize="18" FontWeight="SemiBold" />
             <StackPanel Background="#212121" Orientation="Horizontal">
-              <Label Width="200" Margin="1" Background="White" Content="Naziv" />
-              <Label Width="120" Margin="1" Background="White" Content="Dodan" />
+              <Label Width="200"
+                     Margin="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                     Background="White" Content="Naziv" FontWeight="SemiBold" />
+              <Label Width="120"
+                     Margin="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                     Background="White" Content="Dodan" FontWeight="SemiBold" />
             </StackPanel>
-            <ItemsControl>
+            <ItemsControl ItemsSource="{Binding Roles}">
               <ItemsControl.ItemTemplate>
                 <DataTemplate>
                   <StackPanel Background="#212121" Orientation="Horizontal">
-                    <Label Width="200" Margin="1" Background="White" />
-                    <Label Width="120" Margin="1" Background="White" Content="Dodan" />
+                    <Label Width="200" Height="40"
+                           Margin="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                           Background="White"
+                           Content="{Binding Name}" />
+                    <Grid Width="120" Margin="1" Background="White">
+                      <CheckBox HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding IsSelected}" />
+                    </Grid>
                   </StackPanel>
                 </DataTemplate>
               </ItemsControl.ItemTemplate>
