@@ -31,11 +31,11 @@ public class UserService : IUserService
                 CreatedDate = result.CreatedByUser.CreatedDate,
                 ModifiedDate = result.CreatedByUser.ModifiedDate
             },
-            ModifiedBy = result.ModifiedByUser is null
+            ModifiedBy = result.ModifiedByUserId is null
                 ? null
                 : new UserModel()
                 {
-                    UserId = result.ModifiedByUser.UserId,
+                    UserId = result.ModifiedByUser!.UserId,
                     Username = result.ModifiedByUser.Username,
                     CreatedDate = result.ModifiedByUser.CreatedDate,
                     ModifiedDate = result.ModifiedByUser.ModifiedDate
@@ -65,11 +65,11 @@ public class UserService : IUserService
                 CreatedDate = u.CreatedByUser.CreatedDate,
                 ModifiedDate = u.CreatedByUser.ModifiedDate
             },
-            ModifiedBy = u.ModifiedByUser is null
+            ModifiedBy = u.ModifiedByUserId is null
                 ? null
                 : new UserModel()
                 {
-                    UserId = u.ModifiedByUser.UserId,
+                    UserId = u.ModifiedByUser!.UserId,
                     Username = u.ModifiedByUser.Username,
                     CreatedDate = u.ModifiedByUser.CreatedDate,
                     ModifiedDate = u.ModifiedByUser.ModifiedDate
@@ -77,5 +77,18 @@ public class UserService : IUserService
         }).ToList();
 
         return users;
+    }
+    
+    public async Task<bool> Delete(int deleteId, int modifyId )
+    {
+        var result = await _context.Users
+            .Where(x => x.UserId == deleteId && x.Visible)
+            .ExecuteUpdateAsync(x => x
+                    .SetProperty(p => p.Visible, false)
+                    .SetProperty(p => p.ModifiedDate, DateTime.Now)
+                    .SetProperty(p => p.ModifiedByUserId, modifyId)
+                );
+        
+        return result > 0;
     }
 }
