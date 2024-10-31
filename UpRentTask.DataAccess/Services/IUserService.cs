@@ -1,6 +1,4 @@
-﻿using UprentTask.Library.Models;
-
-namespace UpRentTask.DataAccess.Services;
+﻿namespace UpRentTask.DataAccess.Services;
 
 public interface IUserService
 {

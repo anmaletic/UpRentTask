@@ -1,10 +1,4 @@
-﻿using System.Windows.Controls;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Messaging;
-using UprentTask.Library.Messages;
-using UpRentTask.Views;
-
-namespace UpRentTask.ViewModels;
+﻿namespace UpRentTask.ViewModels;
 
 public partial class MainViewModel : ObservableObject
 {

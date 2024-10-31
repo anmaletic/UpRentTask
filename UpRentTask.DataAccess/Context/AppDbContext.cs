@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using UpRentTask.DataAccess.Entities;
-
-namespace UpRentTask.DataAccess.Context;
+﻿namespace UpRentTask.DataAccess.Context;
 
 public partial class AppDbContext : DbContext
 {

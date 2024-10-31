@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
-
-namespace UpRentTask.DataAccess.Entities;
+﻿namespace UpRentTask.DataAccess.Entities;
 
 [Table("User")]
 public partial class User

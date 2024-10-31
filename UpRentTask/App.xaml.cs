@@ -1,9 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
-using UpRentTask.DataAccess.Context;
-using UpRentTask.DataAccess.Services;
-
-namespace UpRentTask
+﻿namespace UpRentTask
 {
     /// <summary>
     /// Interaction logic for App.xaml

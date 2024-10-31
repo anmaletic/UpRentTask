@@ -1,6 +1,4 @@
-﻿using System.Windows.Controls;
-
-namespace UpRentTask.Views;
+﻿namespace UpRentTask.Views;
 
 public partial class UsersView : UserControl
 {

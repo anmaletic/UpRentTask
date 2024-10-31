@@ -1,12 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.Mvvm.Messaging;
-using UpRentTask.DataAccess.Services;
-using UprentTask.Library.Messages;
-using UprentTask.Library.Models;
-
-namespace UpRentTask.ViewModels;
+﻿namespace UpRentTask.ViewModels;
 
 public partial class UsersViewModel : ObservableObject
 {
