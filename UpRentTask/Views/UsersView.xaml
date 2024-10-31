@@ -28,7 +28,8 @@
 
     <DataGrid Grid.Row="1"
               Margin="10"
-              AutoGenerateColumns="False" CanUserAddRows="False" ColumnHeaderHeight="40"
+              AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" ColumnHeaderHeight="40"
+              IsReadOnly="True"
               ItemsSource="{Binding Users}"
               RowHeight="35"
               SelectedItem="{Binding SelectedUser}">
