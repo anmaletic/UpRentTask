@@ -1,6 +1,6 @@
 ﻿namespace UpRentTask.Library.Models;
 
-public class UserModel
+public class UserModel : ILoggedInUser
 {
     public int UserId { get; set; }
     public string Username { get; set; } = "";

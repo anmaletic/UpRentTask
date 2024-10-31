@@ -21,6 +21,8 @@
                     options.UseSqlServer(config.GetConnectionString("DefaultConnection")))
                 .AddScoped<IUserService, UserService>()
                 
+                .AddSingleton<ILoggedInUser, UserModel>()
+                
                 .AddTransient<MainViewModel>()
                 .AddTransient<UsersViewModel>()
                 .AddTransient<EditUsersViewModel>()
