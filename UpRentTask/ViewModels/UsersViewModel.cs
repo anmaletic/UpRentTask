@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using UpRentTask.DataAccess.Services;
 using UprentTask.Library.Messages;
 using UprentTask.Library.Models;
 
@@ -9,54 +10,27 @@ namespace UpRentTask.ViewModels;
 
 public partial class UsersViewModel : ObservableObject
 {
+    private readonly IUserService _userService;
+    
     [ObservableProperty] private UserModel _selectedUser = new UserModel();
-    [ObservableProperty] private ObservableCollection<UserModel> _users;
+    [ObservableProperty] private ObservableCollection<UserModel>? _users;
 
 
-    public UsersViewModel()
+    public UsersViewModel(IUserService userService)
     {
-        Task.Run(() =>
-        {
-           GenerateDemoUsers();
-        });
+        _userService = userService;
+        Task.Run(async () => await Init());
     }
 
     [RelayCommand]
     private void EditUsers()
     {
         WeakReferenceMessenger.Default.Send(new ChangeViewMessage("EditUsers"));
-    }
 
-    private void GenerateDemoUsers()
-    {
-        Users = new ObservableCollection<UserModel>
-        {
-            new UserModel
-            {
-                UserId = 1,
-                Username = "admin",
-                CreatedDate = DateTime.Now,
-                CreatedBy = new UserModel { UserId = 1, Username = "admin" },
-                // Roles = new List<RoleModel>
-                // {
-                //     new RoleModel { RoleId = 1, RoleName = "Admin" }
-                // }
-            },
-            new UserModel
-            {
-                UserId = 2,
-                Username = "user",
-                CreatedDate = DateTime.Now,
-                CreatedBy = new UserModel { UserId = 1, Username = "admin" },
-                ModifiedDate = DateTime.Now,
-                ModifiedBy = new UserModel { UserId = 1, Username = "admin" },
-                // Roles = new List<RoleModel>
-                // {
-                //     new RoleModel { RoleId = 2, RoleName = "User" }
-                // }
-            }
-        };
-        
     }
     
+    private async Task Init()
+    {
+        Users = new ObservableCollection<UserModel>(await _userService.GetAll());
+    }
 }
