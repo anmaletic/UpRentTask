@@ -2,27 +2,34 @@
 
 public partial class UsersViewModel : ObservableObject
 {
+    private readonly ILoggedInUser _loggedInUser;
     private readonly IUserService _userService;
     
     [ObservableProperty] private UserModel _selectedUser = new UserModel();
     [ObservableProperty] private ObservableCollection<UserModel>? _users;
 
 
-    public UsersViewModel(IUserService userService)
+    public UsersViewModel(ILoggedInUser loggedInUser, IUserService userService)
     {
+        _loggedInUser = loggedInUser;
         _userService = userService;
         Task.Run(async () => await Init());
-    }
-
-    [RelayCommand]
-    private void EditUsers()
-    {
-        WeakReferenceMessenger.Default.Send(new ChangeViewMessage("EditUsers"));
-
     }
     
     private async Task Init()
     {
         Users = new ObservableCollection<UserModel>(await _userService.GetAll());
+    }
+    
+    [RelayCommand]
+    private void EditUsers()
+    {
+        WeakReferenceMessenger.Default.Send(new ChangeViewMessage("EditUsers"));
+    }
+
+    [RelayCommand]
+    private async Task DeleteUser()
+    {
+        var result = await _userService.Delete(SelectedUser.UserId, _loggedInUser.UserId);
     }
 }

@@ -23,14 +23,15 @@
       </StackPanel.Resources>
       <Button Width="120" Command="{Binding EditUsersCommand}" Content="Dodaj" />
       <Button Width="120" Content="Izmjeni" />
-      <Button Width="120" Content="Briši" />
+      <Button Width="120" Command="{Binding DeleteUserCommand}" Content="Briši" />
     </StackPanel>
 
     <DataGrid Grid.Row="1"
               Margin="10"
               AutoGenerateColumns="False" CanUserAddRows="False" ColumnHeaderHeight="40"
               ItemsSource="{Binding Users}"
-              RowHeight="35">
+              RowHeight="35"
+              SelectedItem="{Binding SelectedUser}">
       <DataGrid.Columns>
         <DataGridTextColumn Width="*" Binding="{Binding Username}" Header="Korisničko ime" />
         <DataGridTextColumn Width="*" Binding="{Binding CreatedDate}" Header="Datum kreiranja" />
