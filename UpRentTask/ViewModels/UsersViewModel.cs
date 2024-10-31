@@ -31,5 +31,10 @@ public partial class UsersViewModel : ObservableObject
     private async Task DeleteUser()
     {
         var result = await _userService.Delete(SelectedUser.UserId, _loggedInUser.UserId);
+        
+        if (result)
+        {
+            Users!.Remove(SelectedUser);
+        }
     }
 }
