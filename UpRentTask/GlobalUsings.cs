@@ -13,6 +13,7 @@ global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.DependencyInjection;
 global using UpRentTask.DataAccess.Context;
 global using UpRentTask.DataAccess.Services;
+global using UpRentTask.Library.Interfaces;
 global using UpRentTask.Library.Messages;
 global using UpRentTask.Library.Models;
 global using UpRentTask.ViewModels;
