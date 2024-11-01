@@ -22,8 +22,8 @@
         </Style>
       </StackPanel.Resources>
       <Button Width="120" Command="{Binding LeaveFormCommand}" Content="Izlaz" />
-      <Button Width="120" Command="{Binding AddUserCommand}" Content="Spremi" />
-      <Button Width="120" Content="Spremi i izađi" />
+      <Button Width="120" Command="{Binding SaveCommand}" Content="Spremi" />
+      <Button Width="120" Command="{Binding SaveCommand}" CommandParameter="exit" Content="Spremi i izađi" />
     </StackPanel>
 
     <Border Grid.Row="1" Margin="10" BorderBrush="#212121" BorderThickness="1">
