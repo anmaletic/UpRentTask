@@ -33,7 +33,42 @@ public class UserService : IUserService
 
         return users;
     }
+    
+    public async Task<bool> Add(UserModel user, int userId)
+    {
+        var newUser = new User()
+        {
+            Username = user.Username,
+            CreatedByUserId = userId,
+            Visible = true,
+            UserRoleUsers = user.Roles.Select(role => new UserRole()
+            {
+                RoleId = role.Id,
+                CreatedByUserId = userId,
+                Visible = true
+            }).ToList() 
+        };
 
+        await _context.Users.AddAsync(newUser);
+        await _context.SaveChangesAsync();
+
+        return true;
+    }
+
+    public async Task<bool> Delete(int deleteId, int modifyId )
+    {
+        var result = await _context.Users
+            .Where(x => x.UserId == deleteId && x.Visible)
+            .ExecuteUpdateAsync(x => x
+                    .SetProperty(p => p.Visible, false)
+                    .SetProperty(p => p.ModifiedDate, DateTime.Now)
+                    .SetProperty(p => p.ModifiedByUserId, modifyId)
+                );
+        
+        return result > 0;
+    }
+    
+    
     private UserModel MapToUserModel(User user)
     {
         return new UserModel()
@@ -60,17 +95,5 @@ public class UserService : IUserService
                 }
         };
     }
-    
-    public async Task<bool> Delete(int deleteId, int modifyId )
-    {
-        var result = await _context.Users
-            .Where(x => x.UserId == deleteId && x.Visible)
-            .ExecuteUpdateAsync(x => x
-                    .SetProperty(p => p.Visible, false)
-                    .SetProperty(p => p.ModifiedDate, DateTime.Now)
-                    .SetProperty(p => p.ModifiedByUserId, modifyId)
-                );
-        
-        return result > 0;
-    }
+
 }

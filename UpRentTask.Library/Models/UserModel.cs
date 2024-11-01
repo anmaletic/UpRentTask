@@ -8,4 +8,5 @@ public class UserModel : ILoggedInUser
     public UserModel CreatedBy { get; set; } = null!;
     public DateTime? ModifiedDate { get; set; }
     public UserModel? ModifiedBy { get; set; }
+    public List<RoleModel> Roles { get; set; } = [];
 }

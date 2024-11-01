@@ -22,7 +22,7 @@
         </Style>
       </StackPanel.Resources>
       <Button Width="120" Command="{Binding LeaveFormCommand}" Content="Izlaz" />
-      <Button Width="120" Content="Spremi" />
+      <Button Width="120" Command="{Binding AddUserCommand}" Content="Spremi" />
       <Button Width="120" Content="Spremi i izađi" />
     </StackPanel>
 
@@ -32,7 +32,9 @@
         <StackPanel Margin="0,20" HorizontalAlignment="Center">
           <StackPanel Orientation="Horizontal">
             <Label VerticalContentAlignment="Center" Content="Korisničko ime" />
-            <TextBox Width="180" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+            <TextBox Width="180" Height="35"
+                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                     Text="{Binding Username}" />
           </StackPanel>
         </StackPanel>
 
