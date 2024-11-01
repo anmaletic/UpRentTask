@@ -22,9 +22,18 @@ public partial class UsersViewModel : ObservableObject
     }
     
     [RelayCommand]
-    private void EditUsers()
+    private void AddUser()
     {
-        WeakReferenceMessenger.Default.Send(new ChangeViewMessage("EditUsers"));
+        WeakReferenceMessenger.Default.Send(new ChangeViewMessage("AddUser"));
+    }
+    
+    [RelayCommand]
+    private void EditUser()
+    {
+        WeakReferenceMessenger.Default.Send(new ChangeViewMessage("EditUser", new Dictionary<string, string>
+        {
+            { "UserId", SelectedUser.UserId.ToString() }
+        }));
     }
 
     [RelayCommand]

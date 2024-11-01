@@ -66,6 +66,8 @@ public partial class AppDbContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.UserRoleUsers)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_UserRole_User");
+            
+            entity.HasQueryFilter(x => x.Visible);
         });
 
         OnModelCreatingPartial(modelBuilder);

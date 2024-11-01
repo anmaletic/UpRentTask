@@ -73,6 +73,48 @@ public class UserService : IUserService
         return result > 0;
     }
     
+    public async Task<bool> Update(UserModel updatedUser, int modifyId)
+    {
+        var existingUser = await _context.Users
+            .Include(u => u.UserRoleUsers)
+            .FirstOrDefaultAsync(u => u.UserId == updatedUser.UserId);
+
+        if (existingUser is null) return false;
+        
+        existingUser.Username = updatedUser.Username;
+        existingUser.ModifiedByUserId = modifyId;
+        existingUser.ModifiedDate = DateTime.Now;
+        
+        foreach (var role in existingUser.UserRoleUsers)
+        {
+            if (updatedUser.Roles.All(r => r.Id != role.RoleId))
+            {
+                role.Visible = false;
+                role.ModifiedDate = DateTime.Now;
+                role.ModifiedByUserId = modifyId;
+            }
+        }
+        
+        var newRoles = updatedUser.Roles
+            .Where(r => existingUser.UserRoleUsers.All(x => x.RoleId != r.Id))
+            .Select(r => new UserRole
+            {
+                RoleId = r.Id,
+                CreatedByUserId = modifyId,
+                Visible = true
+            }).ToList();
+
+        foreach (var role in newRoles)
+        {
+            existingUser.UserRoleUsers.Add(role);
+        }
+        
+        _context.Update(existingUser);
+        await _context.SaveChangesAsync();
+        
+        return true;
+    }
+    
     
     private UserModel MapToUserModel(User user)
     {

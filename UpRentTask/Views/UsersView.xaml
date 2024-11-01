@@ -21,8 +21,8 @@
           <Setter Property="Margin" Value="0,0,10,0" />
         </Style>
       </StackPanel.Resources>
-      <Button Width="120" Command="{Binding EditUsersCommand}" Content="Dodaj" />
-      <Button Width="120" Content="Izmjeni" />
+      <Button Width="120" Command="{Binding AddUserCommand}" Content="Dodaj" />
+      <Button Width="120" Command="{Binding EditUserCommand}" Content="Izmjeni" />
       <Button Width="120" Command="{Binding DeleteUserCommand}" Content="Briši" />
     </StackPanel>
 

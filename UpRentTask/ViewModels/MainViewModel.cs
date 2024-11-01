@@ -4,23 +4,25 @@ public partial class MainViewModel : ObservableObject
 {
     private readonly ILoggedInUser _loggedInUser;
     private readonly IUserService _userService;
-    [ObservableProperty] private UserControl _activeView;
+    [ObservableProperty] private UserControl? _activeView;
 
-    public MainViewModel(ILoggedInUser loggedInUser, IUserService userService)
+    public MainViewModel(ILoggedInUser loggedInUser, IUserService userService, IRoleService roleService)
     {
         _loggedInUser = loggedInUser;
         _userService = userService;
 
         WeakReferenceMessenger.Default.Register<ChangeViewMessage>(this, (r, m) =>
+        {
             ActiveView = m.View switch
             {
-                "EditUsers" => new EditUsersView(),
+                "AddUser" => new EditUsersView(),
+                "EditUser" => new EditUsersView { UserId = int.Parse(m.Parameters!["UserId"]) },
                 "Users" => new UsersView(),
                 _ => throw new ArgumentOutOfRangeException()
-            });
+            };
+        });
 
         Task.Run(async () => await Init());
-
     }
 
     private async Task Init()
