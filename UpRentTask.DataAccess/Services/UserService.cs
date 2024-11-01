@@ -14,6 +14,9 @@ public class UserService : IUserService
         var result = await _context.Users
             .Include(u => u.CreatedByUser)
             .Include(u => u.ModifiedByUser)
+            .Include(u => u.UserRoleUsers)
+            .ThenInclude(u => u.Role)
+            .AsNoTracking()
             .FirstOrDefaultAsync(u => u.UserId == id);
 
         return result is null ? null : MapToUserModel(result);
@@ -24,6 +27,8 @@ public class UserService : IUserService
         var result = await _context.Users
             .Include(u => u.CreatedByUser)
             .Include(u => u.ModifiedByUser)
+            .Include(u => u.UserRoleUsers)
+            .ThenInclude(u => u.Role)
             .AsNoTracking()
             .ToListAsync();
 
@@ -92,7 +97,13 @@ public class UserService : IUserService
                     Username = user.ModifiedByUser.Username,
                     CreatedDate = user.ModifiedByUser.CreatedDate,
                     ModifiedDate = user.ModifiedByUser.ModifiedDate
-                }
+                },
+            Roles = user.UserRoleUsers.Select(x => new RoleModel()
+            {
+                Id = x.Role.RoleId,
+                Name = x.Role.RoleName,
+                IsSelected = true
+            }).ToList()
         };
     }
 

@@ -35,6 +35,7 @@ public partial class MainViewModel : ObservableObject
             _loggedInUser.CreatedDate = result.CreatedDate;
             _loggedInUser.ModifiedBy = result.ModifiedBy;
             _loggedInUser.ModifiedDate = result.ModifiedDate;
+            _loggedInUser.Roles = result.Roles;
         }
         
         Application.Current.Dispatcher.Invoke(() => ActiveView = new UsersView());

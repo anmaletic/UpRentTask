@@ -8,4 +8,5 @@ public interface ILoggedInUser
     UserModel CreatedBy { get; set; }
     DateTime? ModifiedDate { get; set; }
     UserModel? ModifiedBy { get; set; }
+    List<RoleModel> Roles { get; set; }
 }
