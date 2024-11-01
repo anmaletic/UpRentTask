@@ -1,9 +1,11 @@
 ﻿namespace UpRentTask.ViewModels;
 
-public partial class UsersViewModel : ObservableObject
+public partial class UsersViewModel : ObservableObject, IAsyncInitialization
 {
     private readonly ILoggedInUser _loggedInUser;
     private readonly IUserService _userService;
+    
+    public Task Initialization { get; }
     
     [ObservableProperty] private UserModel _selectedUser = new UserModel();
     [ObservableProperty] private ObservableCollection<UserModel>? _users;
@@ -13,7 +15,8 @@ public partial class UsersViewModel : ObservableObject
     {
         _loggedInUser = loggedInUser;
         _userService = userService;
-        Task.Run(async () => await Init());
+        
+        Initialization = Init();
     }
     
     private async Task Init()

@@ -1,9 +1,12 @@
 ﻿namespace UpRentTask.ViewModels;
 
-public partial class MainViewModel : ObservableObject
+public partial class MainViewModel : ObservableObject, IAsyncInitialization
 {
     private readonly ILoggedInUser _loggedInUser;
     private readonly IUserService _userService;
+    
+    public Task Initialization { get; }
+    
     [ObservableProperty] private UserControl? _activeView;
 
     public MainViewModel(ILoggedInUser loggedInUser, IUserService userService, IRoleService roleService)
@@ -22,7 +25,7 @@ public partial class MainViewModel : ObservableObject
             };
         });
 
-        Task.Run(async () => await Init());
+        Initialization = Init();
     }
 
     private async Task Init()

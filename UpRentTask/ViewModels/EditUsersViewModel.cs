@@ -1,10 +1,12 @@
 ﻿namespace UpRentTask.ViewModels;
 
-public partial class EditUsersViewModel : ObservableObject
+public partial class EditUsersViewModel : ObservableObject, IAsyncInitialization
 {
     private readonly ILoggedInUser _loggedInUser;
     private readonly IRoleService _roleService;
     private readonly IUserService _userService;
+    
+    public Task Initialization { get; }
 
     [ObservableProperty] private UserModel _user;
     private bool _isEdit;
@@ -18,7 +20,7 @@ public partial class EditUsersViewModel : ObservableObject
         _roleService = roleService;
         _userService = userService;
 
-        Task.Run(async () => await Init());
+        Initialization = Init();
     }
 
     public async Task LoadUser(int userId)
