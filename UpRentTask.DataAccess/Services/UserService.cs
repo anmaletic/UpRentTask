@@ -62,7 +62,15 @@ public class UserService : IUserService
 
     public async Task<bool> Delete(int deleteId, int modifyId )
     {
-        var result = await _context.Users
+        var userResult = await _context.Users
+            .Where(x => x.UserId == deleteId && x.Visible)
+            .ExecuteUpdateAsync(x => x
+                    .SetProperty(p => p.Visible, false)
+                    .SetProperty(p => p.ModifiedDate, DateTime.Now)
+                    .SetProperty(p => p.ModifiedByUserId, modifyId)
+                );
+
+        var roleResult = await _context.UserRoles
             .Where(x => x.UserId == deleteId && x.Visible)
             .ExecuteUpdateAsync(x => x
                     .SetProperty(p => p.Visible, false)
@@ -70,7 +78,7 @@ public class UserService : IUserService
                     .SetProperty(p => p.ModifiedByUserId, modifyId)
                 );
         
-        return result > 0;
+        return userResult > 0;
     }
     
     public async Task<bool> Update(UserModel updatedUser, int modifyId)
