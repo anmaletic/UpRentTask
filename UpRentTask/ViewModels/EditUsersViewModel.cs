@@ -136,6 +136,42 @@ public partial class EditUsersViewModel : ObservableObject, IAsyncInitialization
     [RelayCommand]
     private void LeaveForm()
     {
+        if (IsDataChanged())
+        {
+            WeakReferenceMessenger.Default.Send(new DisplayDialogMessage(new DisplayMessageModel
+            {
+                Title = "Upozorenje",
+                Content = "Nisu spremljene promjene. Želite li izaći?",
+                Btn = Btn.YesNo,
+                IsVisible = true,
+                Closed = async (result) =>
+                {
+                    if (result == Btn.Yes)
+                    {
+                        WeakReferenceMessenger.Default.Send(new ChangeViewMessage("Users"));
+                    }
+                }
+            }));
+            return;
+        }
         WeakReferenceMessenger.Default.Send(new ChangeViewMessage("Users"));
+    }
+    
+    private bool IsDataChanged()
+    {
+        if (User.Username != Username)
+        {
+            return true;
+        }
+        
+        foreach (var role in Roles)
+        {
+            if (role.IsSelected != User.Roles.Any(x => x.Id == role.Id))
+            {
+                return true;
+            }
+        }
+        
+        return false;
     }
 }
