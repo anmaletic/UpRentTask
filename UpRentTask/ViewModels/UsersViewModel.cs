@@ -7,7 +7,7 @@ public partial class UsersViewModel : ObservableObject, IAsyncInitialization
     
     public Task Initialization { get; }
     
-    [ObservableProperty] private UserModel _selectedUser = new UserModel();
+    [ObservableProperty] private UserModel? _selectedUser;
     [ObservableProperty] private ObservableCollection<UserModel>? _users;
 
 
@@ -33,6 +33,18 @@ public partial class UsersViewModel : ObservableObject, IAsyncInitialization
     [RelayCommand]
     private void EditUser()
     {
+        if (SelectedUser is null)
+        {
+            WeakReferenceMessenger.Default.Send(new DisplayDialogMessage(new DisplayMessageModel
+            {
+                Title = "Error",
+                Content = "Korisnik nije odabran.",
+                IsVisible = true
+            }));
+            
+            return;
+        }
+        
         WeakReferenceMessenger.Default.Send(new ChangeViewMessage("EditUser", new Dictionary<string, string>
         {
             { "UserId", SelectedUser.UserId.ToString() }
@@ -42,6 +54,17 @@ public partial class UsersViewModel : ObservableObject, IAsyncInitialization
     [RelayCommand]
     private async Task DeleteUser()
     {
+        if (SelectedUser is null)
+        {
+            WeakReferenceMessenger.Default.Send(new DisplayDialogMessage(new DisplayMessageModel
+            {
+                Title = "Error",
+                Content = "Korisnik nije odabran.",
+                IsVisible = true
+            }));
+            return;
+        }
+        
         var result = await _userService.Delete(SelectedUser.UserId, _loggedInUser.UserId);
         
         if (result)

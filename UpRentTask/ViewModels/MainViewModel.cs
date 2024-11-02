@@ -8,6 +8,7 @@ public partial class MainViewModel : ObservableObject, IAsyncInitialization
     public Task Initialization { get; }
     
     [ObservableProperty] private UserControl? _activeView;
+    [ObservableProperty] private DisplayMessageModel _message = new();
 
     public MainViewModel(ILoggedInUser loggedInUser, IUserService userService, IRoleService roleService)
     {
@@ -24,8 +25,14 @@ public partial class MainViewModel : ObservableObject, IAsyncInitialization
                 _ => throw new ArgumentOutOfRangeException()
             };
         });
+        
+        WeakReferenceMessenger.Default.Register<DisplayDialogMessage>(this, (_, m) =>
+        {
+            DisplayDialog(m.Msg);
+        });
 
         Initialization = Init();
+        
     }
 
     private async Task Init()
@@ -44,5 +51,10 @@ public partial class MainViewModel : ObservableObject, IAsyncInitialization
         }
         
         Application.Current.Dispatcher.Invoke(() => ActiveView = new UsersView());
+    }
+    
+    private void DisplayDialog(DisplayMessageModel msg)
+    {
+        Message = msg;
     }
 }
