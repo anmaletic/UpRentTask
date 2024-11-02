@@ -27,8 +27,9 @@
     </StackPanel>
 
     <Border Grid.Row="1" Margin="10" BorderBrush="#212121" BorderThickness="1">
-      <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
 
+      <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock Foreground="OrangeRed" Text="{Binding ValidationMsg}" />
         <StackPanel Margin="0,20" HorizontalAlignment="Center">
           <StackPanel Orientation="Horizontal">
             <Label VerticalContentAlignment="Center" Content="Korisničko ime" />

@@ -1,4 +1,6 @@
-﻿namespace UpRentTask.ViewModels;
+﻿using UpRentTask.Library.Validators;
+
+namespace UpRentTask.ViewModels;
 
 public partial class EditUsersViewModel : ObservableObject, IAsyncInitialization
 {
@@ -13,6 +15,7 @@ public partial class EditUsersViewModel : ObservableObject, IAsyncInitialization
 
     [ObservableProperty] private ObservableCollection<RoleModel> _roles;
     [ObservableProperty] private string _username = "";
+    [ObservableProperty] private string _validationMsg = "";
 
     public EditUsersViewModel(ILoggedInUser loggedInUser, IRoleService roleService, IUserService userService)
     {
@@ -49,13 +52,31 @@ public partial class EditUsersViewModel : ObservableObject, IAsyncInitialization
         else
         {
             await AddUser();
-            ClearForm();
         }
 
         if (!string.IsNullOrEmpty(exit))
         {
             LeaveForm();
         }
+    }
+
+    private bool ValidateUser()
+    {
+        ValidationMsg = "";
+        
+        UserValidator userValidator = new UserValidator();
+        var validationResult = userValidator.Validate(User);
+
+        if (validationResult.IsValid)
+        {
+            return true;
+        }
+
+        foreach (var error in validationResult.Errors)
+        {
+            ValidationMsg += error.ErrorMessage + "\n";
+        }
+        return false;
     }
 
     private async Task<bool> AddUser()
@@ -73,8 +94,11 @@ public partial class EditUsersViewModel : ObservableObject, IAsyncInitialization
             }
         }
 
+        if (!ValidateUser()) return false;
+            
         var result = await _userService.Add(User, _loggedInUser.UserId);
-
+        ClearForm();
+        
         return result;
     }
 
@@ -91,8 +115,9 @@ public partial class EditUsersViewModel : ObservableObject, IAsyncInitialization
             }
         }
 
-        var result = await _userService.Update(User, _loggedInUser.UserId);
+        if (!ValidateUser()) return false;
 
+        var result = await _userService.Update(User, _loggedInUser.UserId);
         return result;
     }
 
