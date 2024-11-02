@@ -33,35 +33,22 @@ public partial class UsersViewModel : ObservableObject, IAsyncInitialization
     [RelayCommand]
     private void EditUser()
     {
-        if (SelectedUser is null)
+        if (!IsUserSelected())
         {
-            WeakReferenceMessenger.Default.Send(new DisplayDialogMessage(new DisplayMessageModel
-            {
-                Title = "Error",
-                Content = "Korisnik nije odabran.",
-                IsVisible = true
-            }));
-            
             return;
         }
-        
+
         WeakReferenceMessenger.Default.Send(new ChangeViewMessage("EditUser", new Dictionary<string, string>
         {
-            { "UserId", SelectedUser.UserId.ToString() }
+            { "UserId", SelectedUser!.UserId.ToString() }
         }));
     }
 
     [RelayCommand]
     private async Task DeleteUser()
     {
-        if (SelectedUser is null)
+        if (!IsUserSelected())
         {
-            WeakReferenceMessenger.Default.Send(new DisplayDialogMessage(new DisplayMessageModel
-            {
-                Title = "Error",
-                Content = "Korisnik nije odabran.",
-                IsVisible = true
-            }));
             return;
         }
         
@@ -72,4 +59,23 @@ public partial class UsersViewModel : ObservableObject, IAsyncInitialization
             Users!.Remove(SelectedUser);
         }
     }
+    
+    private bool IsUserSelected()
+    {
+        if (SelectedUser is null)
+        {
+            WeakReferenceMessenger.Default.Send(new DisplayDialogMessage(new DisplayMessageModel
+            {
+                Title = "Upozorenje",
+                Content = "Korisnik nije odabran.",
+                IsVisible = true
+            }));
+
+            return false;
+        }
+
+        return true;
+    }
+    
+
 }
