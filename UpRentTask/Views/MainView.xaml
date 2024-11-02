@@ -6,9 +6,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:UpRentTask.ViewModels"
         Title="MainView"
-        Width="800"
-        Height="450"
+        Width="1200"
+        Height="800"
         d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
+        Background="{DynamicResource PrimaryBrush}"
         mc:Ignorable="d">
 
   <Grid>

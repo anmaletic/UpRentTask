@@ -7,6 +7,7 @@
              d:DataContext="{d:DesignInstance viewModels:EditUsersViewModel}"
              d:DesignHeight="800"
              d:DesignWidth="1200"
+             Background="{DynamicResource PrimaryBrush}"
              mc:Ignorable="d">
 
   <Grid>
@@ -15,61 +16,74 @@
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
 
-    <StackPanel Grid.Row="0" Margin="10" Orientation="Horizontal">
-      <StackPanel.Resources>
-        <Style TargetType="{x:Type Button}">
-          <Setter Property="Margin" Value="0,0,10,0" />
-        </Style>
-      </StackPanel.Resources>
-      <Button Width="120" Command="{Binding LeaveFormCommand}" Content="Izlaz" />
-      <Button Width="120" Command="{Binding SaveCommand}" Content="Spremi" />
-      <Button Width="120" Command="{Binding SaveCommand}" CommandParameter="exit" Content="Spremi i izađi" />
-    </StackPanel>
+    <Grid Grid.Row="0" Background="{DynamicResource PrimaryBrush}">
 
-    <Border Grid.Row="1" Margin="10" BorderBrush="#212121" BorderThickness="1">
-
-      <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-        <TextBlock Foreground="OrangeRed" Text="{Binding ValidationMsg}" />
-        <StackPanel Margin="0,20" HorizontalAlignment="Center">
-          <StackPanel Orientation="Horizontal">
-            <Label VerticalContentAlignment="Center" Content="Korisničko ime" />
-            <TextBox Width="180" Height="35"
-                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                     Text="{Binding Username}" />
-          </StackPanel>
-        </StackPanel>
-
-        <Border BorderBrush="#212121" BorderThickness="1" CornerRadius="20">
-          <StackPanel Margin="20,10,20,20">
-            <Label Margin="20,0,0,0" VerticalContentAlignment="Center"
-                   Content="Dodjeljene grupe" FontSize="18" FontWeight="SemiBold" />
-            <StackPanel Background="#212121" Orientation="Horizontal">
-              <Label Width="200"
-                     Margin="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                     Background="White" Content="Naziv" FontWeight="SemiBold" />
-              <Label Width="120"
-                     Margin="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                     Background="White" Content="Dodan" FontWeight="SemiBold" />
-            </StackPanel>
-            <ItemsControl ItemsSource="{Binding Roles}">
-              <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                  <StackPanel Background="#212121" Orientation="Horizontal">
-                    <Label Width="200" Height="40"
-                           Margin="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                           Background="White"
-                           Content="{Binding Name}" />
-                    <Grid Width="120" Margin="1" Background="White">
-                      <CheckBox HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding IsSelected}" />
-                    </Grid>
-                  </StackPanel>
-                </DataTemplate>
-              </ItemsControl.ItemTemplate>
-            </ItemsControl>
-          </StackPanel>
-        </Border>
+      <StackPanel Margin="10" Orientation="Horizontal">
+        <Button Width="120"
+                Margin="0,0,10,0"
+                Command="{Binding LeaveFormCommand}"
+                Content="Izlaz" FontWeight="SemiBold"
+                Style="{DynamicResource CustomButton}" />
+        <Button Width="120"
+                Margin="0,0,10,0"
+                Command="{Binding SaveCommand}"
+                Content="Spremi" FontWeight="SemiBold"
+                Style="{DynamicResource CustomButton}" />
+        <Button Width="120"
+                Margin="0,0,10,0"
+                Command="{Binding SaveCommand}"
+                CommandParameter="exit" Content="Spremi i izađi" FontWeight="SemiBold"
+                Style="{DynamicResource CustomButton}" />
       </StackPanel>
-    </Border>
+    </Grid>
+
+    <Grid Grid.Row="1" Background="{DynamicResource SecondaryBrush}">
+
+      <Border Margin="10" Background="{DynamicResource LightBrush}" BorderBrush="#212121" BorderThickness="1">
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+          <TextBlock Foreground="OrangeRed" Text="{Binding ValidationMsg}" />
+          <StackPanel Margin="0,20" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+              <Label VerticalContentAlignment="Center" Content="Korisničko ime" />
+              <TextBox Width="180" Height="35"
+                       HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                       Text="{Binding Username}" />
+            </StackPanel>
+          </StackPanel>
+
+          <Border BorderBrush="#212121" BorderThickness="1" CornerRadius="20">
+            <StackPanel Margin="20,10,20,20">
+              <Label Margin="20,0,0,0" VerticalContentAlignment="Center"
+                     Content="Dodjeljene grupe" FontSize="18" FontWeight="SemiBold" />
+              <StackPanel Background="#212121" Orientation="Horizontal">
+                <Label Width="200"
+                       Margin="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                       Background="White" Content="Naziv" FontWeight="SemiBold" />
+                <Label Width="120"
+                       Margin="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                       Background="White" Content="Dodan" FontWeight="SemiBold" />
+              </StackPanel>
+              <ItemsControl ItemsSource="{Binding Roles}">
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate>
+                    <StackPanel Background="#212121" Orientation="Horizontal">
+                      <Label Width="200" Height="40"
+                             Margin="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                             Background="White"
+                             Content="{Binding Name}" />
+                      <Grid Width="120" Margin="1" Background="White">
+                        <CheckBox HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding IsSelected}" />
+                      </Grid>
+                    </StackPanel>
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
+            </StackPanel>
+          </Border>
+        </StackPanel>
+      </Border>
+    </Grid>
 
   </Grid>
 </UserControl>

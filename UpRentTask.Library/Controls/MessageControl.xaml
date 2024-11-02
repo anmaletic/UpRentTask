@@ -5,8 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d">
 
-  <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#7C262626">
-    <Border MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Azure">
+  <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#22262626">
+    <Border MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{DynamicResource SecondaryBrush}">
 
       <Grid>
         <Grid.RowDefinitions>
@@ -17,9 +17,10 @@
 
         <Label Grid.Row="0"
                Padding="5,0"
-               Background="White"
+               Background="{DynamicResource PrimaryBrush}"
                Content="{Binding Message.Title}"
-               FontSize="26" />
+               FontSize="26"
+               Foreground="{DynamicResource LightBrush}" />
         <Label Grid.Row="1" Padding="10,5" Content="{Binding Message.Content}" FontSize="16" />
 
         <!--  Button Ok  -->
@@ -38,7 +39,8 @@
 
           <Button Width="70"
                   Margin="10" HorizontalAlignment="Right"
-                  Click="ButtonBase_OnClick" CommandParameter="Ok" Content="U redu" FontSize="16" />
+                  Click="ButtonBase_OnClick" CommandParameter="Ok" Content="U redu" FontSize="16"
+                  Style="{DynamicResource CustomButton}" />
         </StackPanel>
 
         <!--  Button YesNo  -->
@@ -58,10 +60,13 @@
             </Style>
           </StackPanel.Style>
 
-          <Button Width="60"
-                  Click="ButtonBase_OnClick" CommandParameter="Yes" Content="Izađi" FontSize="16" />
-          <Button Width="60"
-                  Click="ButtonBase_OnClick" CommandParameter="No" Content="Nastavi" FontSize="16" />
+          <Button Width="70"
+                  Margin="0,0,5,0"
+                  Click="ButtonBase_OnClick" CommandParameter="Yes" Content="Izađi" FontSize="16"
+                  Style="{DynamicResource CustomButton}" />
+          <Button Width="70"
+                  Click="ButtonBase_OnClick" CommandParameter="No" Content="Nastavi" FontSize="16"
+                  Style="{DynamicResource CustomButton}" />
         </StackPanel>
 
       </Grid>

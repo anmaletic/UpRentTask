@@ -4,7 +4,13 @@
              StartupUri="/Views/MainView.xaml">
   <Application.Resources>
     <ResourceDictionary>
+
       <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/UpRentTask.Library;component/Resources/Styles/Colors.xaml" />
+        <ResourceDictionary Source="/UpRentTask.Library;component/Resources/Styles/ButtonStyle.xaml" />
+      </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>
 </Application>
