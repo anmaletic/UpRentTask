@@ -24,6 +24,7 @@ public partial class EditUsersView : UserControl
     {
         if (UserId != -1 && DataContext is EditUsersViewModel vm)
         {
+            await vm.Initialization;
             await vm.LoadUser(UserId);
         }
     }
