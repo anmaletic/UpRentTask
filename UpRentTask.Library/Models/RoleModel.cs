@@ -1,7 +1,4 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
-namespace UpRentTask.Library.Models;
+﻿namespace UpRentTask.Library.Models;
 
 public class RoleModel : INotifyPropertyChanged
 {
