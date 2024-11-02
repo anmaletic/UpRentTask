@@ -28,12 +28,20 @@ public partial class EditUsersViewModel : ObservableObject, IAsyncInitialization
 
     public async Task LoadUser(int userId)
     {
-        _isEdit = true;
-        User = (await _userService.GetById(userId))!;
-        Username = User.Username;
-        foreach (var role in Roles)
+        if (userId != -1 )
         {
-            role.IsSelected = User.Roles.Any(x => x.Id == role.Id);
+            _isEdit = true;
+            User = (await _userService.GetById(userId))!;
+            Username = User.Username;
+            foreach (var role in Roles)
+            {
+                role.IsSelected = User.Roles.Any(x => x.Id == role.Id);
+            }
+        }
+        else
+        {
+            _isEdit = false;
+            User = new UserModel();
         }
     }
 
@@ -81,10 +89,7 @@ public partial class EditUsersViewModel : ObservableObject, IAsyncInitialization
 
     private async Task<bool> AddUser()
     {
-        User = new UserModel
-        {
-            Username = Username
-        };
+        User.Username = Username;
 
         foreach (var role in Roles)
         {

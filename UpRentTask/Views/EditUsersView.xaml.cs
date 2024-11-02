@@ -22,7 +22,7 @@ public partial class EditUsersView : UserControl
     
     private async void OnLoaded(object sender, RoutedEventArgs e)
     {
-        if (UserId != -1 && DataContext is EditUsersViewModel vm)
+        if (DataContext is EditUsersViewModel vm)
         {
             await vm.Initialization;
             await vm.LoadUser(UserId);
