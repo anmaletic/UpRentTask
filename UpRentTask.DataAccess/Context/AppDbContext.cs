@@ -1,4 +1,7 @@
-﻿namespace UpRentTask.DataAccess.Context;
+﻿using System.IO;
+using Microsoft.Extensions.Configuration;
+
+namespace UpRentTask.DataAccess.Context;
 
 public partial class AppDbContext : DbContext
 {
@@ -16,7 +19,21 @@ public partial class AppDbContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     public virtual DbSet<UserRole> UserRoles { get; set; }
-    
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            var config = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+            
+            optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"));
+        }
+        base.OnConfiguring(optionsBuilder);
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Role>(entity =>
@@ -30,6 +47,8 @@ public partial class AppDbContext : DbContext
                 .HasConstraintName("FK_Role_User_Created");
 
             entity.HasOne(d => d.ModifiedByUser).WithMany(p => p.RoleModifiedByUsers).HasConstraintName("FK_Role_User_Modified");
+            
+            entity.HasQueryFilter(x => x.Visible);
         });
 
         modelBuilder.Entity<User>(entity =>

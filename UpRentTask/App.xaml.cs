@@ -1,4 +1,6 @@
-﻿namespace UpRentTask
+﻿using UpRentTask.DataAccess;
+
+namespace UpRentTask
 {
     /// <summary>
     /// Interaction logic for App.xaml
@@ -17,16 +19,13 @@
             Ioc.Default.ConfigureServices(new ServiceCollection()
                 .AddSingleton(config)
                 
-                .AddDbContext<AppDbContext>(options =>
-                    options.UseSqlServer(config.GetConnectionString("DefaultConnection")))
-                .AddScoped<IUserService, UserService>()
-                .AddScoped<IRoleService, RoleService>()
-                
                 .AddSingleton<ILoggedInUser, UserModel>()
                 
                 .AddTransient<MainViewModel>()
                 .AddTransient<UsersViewModel>()
                 .AddTransient<EditUsersViewModel>()
+                
+                .AddDataAccess()
                 
                 .BuildServiceProvider());
         }
