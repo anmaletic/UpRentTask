@@ -5,11 +5,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:UpRentTask.ViewModels"
-        Title="MainView"
+        Title="UpRENT"
         Width="1200"
         Height="800"
         d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
         Background="{DynamicResource PrimaryBrush}"
+        Icon="pack://application:,,,/UpRentTask.Library;component/Resources/Icons/excavator.512x512.ico"
         mc:Ignorable="d">
 
   <Grid>

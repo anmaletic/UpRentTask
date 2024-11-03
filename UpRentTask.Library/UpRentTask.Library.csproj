@@ -13,4 +13,8 @@
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Resource Include="Resources\Icons\excavator.512x512.ico" />
+    </ItemGroup>
+
 </Project>
