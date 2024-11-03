@@ -53,16 +53,18 @@ public partial class EditUsersViewModel : ObservableObject, IAsyncInitialization
     [RelayCommand]
     private async Task Save(string exit)
     {
+        bool isSuccess;
+        
         if (_isEdit)
         {
-            await UpdateUser(exit);
+            isSuccess = await UpdateUser(exit);
         }
         else
         {
-            await AddUser();
+            isSuccess = await AddUser();
         }
 
-        if (!string.IsNullOrEmpty(exit))
+        if (!string.IsNullOrEmpty(exit) && isSuccess)
         {
             LeaveForm();
         }
