@@ -4,35 +4,35 @@ public partial class MainViewModel : ObservableObject, IAsyncInitialization
 {
     private readonly ILoggedInUser _loggedInUser;
     private readonly IUserService _userService;
-    
+    private readonly IViewManager _viewManager;
+
     public Task Initialization { get; }
-    
+
     [ObservableProperty] private UserControl? _activeView;
     [ObservableProperty] private DisplayMessageModel _message = new();
 
-    public MainViewModel(ILoggedInUser loggedInUser, IUserService userService, IRoleService roleService)
+    public MainViewModel(ILoggedInUser loggedInUser, IUserService userService, IRoleService roleService,
+        IViewManager viewManager)
     {
         _loggedInUser = loggedInUser;
         _userService = userService;
+        _viewManager = viewManager;
 
         WeakReferenceMessenger.Default.Register<ChangeViewMessage>(this, (r, m) =>
         {
             ActiveView = m.View switch
             {
-                "AddUser" => new EditUsersView(),
-                "EditUser" => new EditUsersView { UserId = int.Parse(m.Parameters!["UserId"]) },
-                "Users" => new UsersView(),
+                "AddUser" => _viewManager.GetView("EditUsersView"),
+                "EditUser" => _viewManager.GetView("EditUsersView", m.Parameters),
+                "Users" => _viewManager.GetView("UsersView"),
                 _ => throw new ArgumentOutOfRangeException()
             };
         });
-        
-        WeakReferenceMessenger.Default.Register<DisplayDialogMessage>(this, (_, m) =>
-        {
-            DisplayDialog(m.Msg);
-        });
+
+
+        WeakReferenceMessenger.Default.Register<DisplayDialogMessage>(this, (_, m) => { DisplayDialog(m.Msg); });
 
         Initialization = Init();
-        
     }
 
     private async Task Init()
@@ -50,9 +50,9 @@ public partial class MainViewModel : ObservableObject, IAsyncInitialization
             _loggedInUser.Roles = result.Roles;
         }
         
-        Application.Current.Dispatcher.Invoke(() => ActiveView = new UsersView());
+        ActiveView = _viewManager.GetView("UsersView");
     }
-    
+
     private void DisplayDialog(DisplayMessageModel msg)
     {
         Message = msg;

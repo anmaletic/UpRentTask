@@ -1,6 +1,4 @@
-﻿using UpRentTask.DataAccess;
-
-namespace UpRentTask
+﻿namespace UpRentTask
 {
     /// <summary>
     /// Interaction logic for App.xaml
@@ -20,6 +18,10 @@ namespace UpRentTask
                 .AddSingleton(config)
                 
                 .AddSingleton<ILoggedInUser, UserModel>()
+                
+                .AddSingleton<IViewManager>(ViewManager.Instance)
+                .RegisterViewWithViewManager<UsersView, UsersViewModel>("UsersView")
+                .RegisterViewWithViewManager<EditUsersView, EditUsersViewModel>("EditUsersView")
                 
                 .AddTransient<MainViewModel>()
                 .AddTransient<UsersViewModel>()

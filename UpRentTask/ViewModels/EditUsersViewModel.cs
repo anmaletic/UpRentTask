@@ -1,8 +1,6 @@
-﻿using UpRentTask.Library.Validators;
+﻿namespace UpRentTask.ViewModels;
 
-namespace UpRentTask.ViewModels;
-
-public partial class EditUsersViewModel : ObservableObject, IAsyncInitialization
+public partial class EditUsersViewModel : ObservableObject, IAsyncInitialization, IParameterized
 {
     private readonly ILoggedInUser _loggedInUser;
     private readonly IRoleService _roleService;
@@ -180,5 +178,14 @@ public partial class EditUsersViewModel : ObservableObject, IAsyncInitialization
         }
         
         return false;
+    }
+    
+    public async Task OnParametersSet(Dictionary<string, string> parameter)
+    {
+        await Initialization;
+
+        var userId = parameter.TryGetValue("UserId", out var value) ? int.Parse(value) : -1;
+        
+        await LoadUser(userId);
     }
 }
