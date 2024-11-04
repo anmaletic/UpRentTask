@@ -41,6 +41,7 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.CreatedDate).HasDefaultValueSql("(getdate())");
             entity.Property(e => e.Version).HasDefaultValue(1);
             entity.Property(e => e.Visible).HasDefaultValue(true);
+            entity.Property(e => e.Locked).HasDefaultValue(false);
 
             entity.HasOne(d => d.CreatedByUser).WithMany(p => p.RoleCreatedByUsers)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -56,6 +57,7 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.CreatedDate).HasDefaultValueSql("(getdate())");
             entity.Property(e => e.Version).HasDefaultValue(1);
             entity.Property(e => e.Visible).HasDefaultValue(true);
+            entity.Property(e => e.Locked).HasDefaultValue(false);
 
             entity.HasOne(d => d.CreatedByUser).WithMany(p => p.InverseCreatedByUser)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -71,6 +73,7 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.CreatedDate).HasDefaultValueSql("(getdate())");
             entity.Property(e => e.Version).HasDefaultValue(1);
             entity.Property(e => e.Visible).HasDefaultValue(true);
+            entity.Property(e => e.Locked).HasDefaultValue(false);
 
             entity.HasOne(d => d.CreatedByUser).WithMany(p => p.UserRoleCreatedByUsers)
                 .OnDelete(DeleteBehavior.ClientSetNull)
