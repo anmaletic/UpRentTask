@@ -9,6 +9,14 @@
              d:DesignWidth="1200"
              Background="{DynamicResource PrimaryBrush}"
              mc:Ignorable="d">
+
+  <UserControl.Resources>
+    <Style x:Key="CellStyle" TargetType="TextBlock">
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+  </UserControl.Resources>
+
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="60" />
@@ -42,14 +50,31 @@
                 Background="{DynamicResource LightBrush}"
                 CanUserAddRows="False" CanUserDeleteRows="False" ColumnHeaderHeight="40" IsReadOnly="True"
                 ItemsSource="{Binding Users}"
-                RowHeight="35"
-                SelectedItem="{Binding SelectedUser}">
+                RowHeaderWidth="0" RowHeight="35"
+                SelectedItem="{Binding SelectedUser}"
+                SelectionMode="Single">
+
+        <DataGrid.Resources>
+          <Style TargetType="DataGridColumnHeader">
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="Background" Value="{DynamicResource PrimaryBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource LightBrush}" />
+          </Style>
+        </DataGrid.Resources>
+
+        <DataGrid.CellStyle>
+          <Style TargetType="DataGridCell">
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+          </Style>
+        </DataGrid.CellStyle>
+
         <DataGrid.Columns>
-          <DataGridTextColumn Width="*" Binding="{Binding Username}" Header="Korisničko ime" />
-          <DataGridTextColumn Width="*" Binding="{Binding CreatedDate}" Header="Datum kreiranja" />
-          <DataGridTextColumn Width="*" Binding="{Binding CreatedBy.Username}" Header="Kreirao" />
-          <DataGridTextColumn Width="*" Binding="{Binding ModifiedDate}" Header="Datum izmjene" />
-          <DataGridTextColumn Width="*" Binding="{Binding ModifiedBy.Username}" Header="Izmjenio" />
+          <DataGridTextColumn Width="*" Binding="{Binding Username}" ElementStyle="{StaticResource CellStyle}" Header="Korisničko ime" />
+          <DataGridTextColumn Width="*" Binding="{Binding CreatedDate, StringFormat=dd.MM.yyyy HH:mm}" ElementStyle="{StaticResource CellStyle}" Header="Datum kreiranja" />
+          <DataGridTextColumn Width="*" Binding="{Binding CreatedBy.Username}" ElementStyle="{StaticResource CellStyle}" Header="Kreirao" />
+          <DataGridTextColumn Width="*" Binding="{Binding ModifiedDate, StringFormat=dd.MM.yyyy HH:mm}" ElementStyle="{StaticResource CellStyle}" Header="Datum izmjene" />
+          <DataGridTextColumn Width="*" Binding="{Binding ModifiedBy.Username}" ElementStyle="{StaticResource CellStyle}" Header="Izmjenio" />
         </DataGrid.Columns>
       </DataGrid>
     </Grid>
