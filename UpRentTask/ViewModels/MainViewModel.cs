@@ -37,7 +37,7 @@ public partial class MainViewModel : ObservableObject, IAsyncInitialization
 
     private async Task Init()
     {
-        var result = await _userService.GetById(1);
+        var result = (await _userService.GetAll())[0];
 
         if (result is not null)
         {
